@@ -8,21 +8,25 @@ kartu = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4,
 
 kartuShuffle = random.choices(kartu, k=52) # acak deck
 
+kartuP = []
+kartuQ = []
+kartuR = []
+kartuS = []
+
+print("Deck: %s" % kartuShuffle)
+
 # Bagikan kartu ke pemain
-x = 0
+x = -1
 while x < 4:
     x += 1
 
-    # ambil 5 kartu pertama dari deck
-    kartuP = random.choices(kartuShuffle, k=5)
-    kartuQ = random.choices(kartuShuffle, k=5)
-    kartuR = random.choices(kartuShuffle, k=5)
-    kartuS = random.choices(kartuShuffle, k=5)
-
-    # singkirkan 5 kartu di deck utama yang udah diambil
-    kartuShuffle.remove(kartuP[x])
+    kartuP.append(kartuShuffle[x]) # ambil 5 kartu pertama dari deck
+    kartuShuffle.remove(kartuP[x]) # singkirkan 5 kartu di deck utama yang udah diambil
+    kartuQ.append(kartuShuffle[x])
     kartuShuffle.remove(kartuQ[x]) 
+    kartuR.append(kartuShuffle[x])
     kartuShuffle.remove(kartuR[x])
+    kartuS.append(kartuShuffle[x])
     kartuShuffle.remove(kartuS[x])
 
 # Mulai permainan
@@ -33,15 +37,15 @@ while m < 1:
     # Player 1
     print("Player 1")
     print("Kartu yang dimiliki: %s" % kartuP)
-    decs = input("Masukkan tindakan: ")
+    decs = input("Tindakan: ")
     if(decs == "pull"):
         kartuP.append(kartuShuffle[0]) # ambil dari deck
         kartuShuffle.remove(kartuShuffle[0]) # kartu di deck berkurang
         
         # Pilih kartu yang mau dibuang
         buang = int(input("Kartu yang dibuang: "))
-        kartuP.remove(kartuP[buang])
-        kartuShuffle.append(kartuP[buang])
+        kartuP.remove(buang)
+        kartuShuffle.append(buang)
 
         print("Kartu yang dimiliki: %s" % kartuP)
         
@@ -53,7 +57,7 @@ while m < 1:
     # Player 2
     print("Player 2")
     print("Kartu yang dimiliki: %s" % kartuQ)
-    decs = input("Masukkan tindakan: ")
+    decs = input("Tindakan: ")
     if(decs == "pull"):
         kartuQ.append(kartuShuffle[0])
         kartuShuffle.remove(kartuShuffle[0])
@@ -61,8 +65,8 @@ while m < 1:
         
         # Pilih kartu yang mau dibuang
         buang = int(input("Kartu yang dibuang: "))
-        kartuQ.remove(kartuQ[buang])
-        kartuShuffle.append(kartuQ[buang])
+        kartuQ.remove(buang)
+        kartuShuffle.append(buang)
 
         print("Kartu yang dimiliki: %s" % kartuQ)
         
@@ -74,15 +78,15 @@ while m < 1:
     # Player 3
     print("Player 3")
     print("Kartu yang dimiliki: %s" % kartuR)
-    decs = input("Masukkan tindakan: ")
+    decs = input("Tindakan: ")
     if(decs == "pull"):
         kartuR.append(kartuShuffle[0])
         kartuShuffle.remove(kartuShuffle[0])
         
         # Pilih kartu yang mau dibuang
         buang = int(input("Kartu yang dibuang: "))
-        kartuR.remove(kartuR[buang])
-        kartuShuffle.append(kartuR[buang])
+        kartuR.remove(buang)
+        kartuShuffle.append(buang)
 
         print("Kartu yang dimiliki: %s" % kartuR)
         
@@ -94,12 +98,10 @@ while m < 1:
     # Player 4
     print("Player 4")
     print("Kartu yang dimiliki: %s" % kartuS)
-    
-    model_dTree.model(kartuS)
-    
-    print("Masukkan tindakan: %s" % decs)
 
-    if(decs == "pull"):
+    decsAuto = model_dTree.model(kartuS)
+    print("Tindakan: %s" % decsAuto)
+    if(decsAuto == "pull"):
         kartuS.append(kartuShuffle[0])
         kartuShuffle.remove(kartuShuffle[0])
         
@@ -110,27 +112,28 @@ while m < 1:
 
         print("Kartu yang dimiliki: %s" % kartuS)
         
-    elif(decs == "place"):
+    elif(decsAuto == "place"):
         print("Permainan berakhir")
         m = 2
 
+# Total Jumlah Kartu masing-masing pemain
 totalP = 0
 for p in kartuP:
     totalP += p
-print(totalP)
+print("Player 1: %s" % totalP)
 
 totalQ = 0
 for q in kartuQ:
     totalQ += q
-print(totalQ)
+print("Player 2: %s" % totalQ)
 
 totalR = 0
 for r in kartuR:
     totalR += p
-print(totalR)
+print("Player 3: %s" % totalR)
 
 totalS = 0
 for s in kartuS:
     totalS += s
-print(totalS)
+print("Player 4: %s" % totalS)
     

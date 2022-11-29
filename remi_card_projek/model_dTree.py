@@ -36,6 +36,6 @@ def model(kartuS):
     # Coba prediksi
     # print(tree_model.predict([[13, 13, 12, 1, 9]])[0])
 
-    decs = tree_model.predict([kartuS])[0]
+    decsAuto = tree_model.predict([kartuS])[0]
 
-    return decs
+    return decsAuto

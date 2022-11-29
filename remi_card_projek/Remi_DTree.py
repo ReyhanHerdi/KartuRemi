@@ -35,7 +35,10 @@ print('Accuracy: ', acc_secore)
 # Coba prediksi
 # print(tree_model.predict([[13, 13, 12, 1, 9]])[0])
 
-if(tree_model.predict([[13, 1, 12, 1, 9]])[0] == "place"):
+kartu = [13, 9, 9, 13, 13]
+decsAuto = tree_model.predict([kartu])[0]
+
+if(tree_model.predict([kartu])[0] == "place"):
     print("Menang")
 else:
     print("Ambil kartu")
